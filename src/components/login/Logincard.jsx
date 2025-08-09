@@ -32,22 +32,21 @@ export function Logincard() {
             <CardHeader>
               <CardTitle>Students</CardTitle>
               <CardDescription>
-                Make changes to your account here. Click save when you&apos;re
-                done.
+                Basta Student
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
               <div className="grid gap-3">
-                <Label htmlFor="tabs-demo-name">Name</Label>
-                <Input id="tabs-demo-name" defaultValue="Pedro Duarte" />
+                <Label htmlFor="tabs-demo-name">ID Number</Label>
+                <Input id="tabs-demo-name" placeholder="12345678" />
               </div>
               <div className="grid gap-3">
-                <Label htmlFor="tabs-demo-username">Username</Label>
-                <Input id="tabs-demo-username" defaultValue="@peduarte" />
+                <Label htmlFor="tabs-demo-username">Password</Label>
+                <Input id="tabs-demo-username" placeholder="Password" type="password" />
               </div>
             </CardContent>
             <CardFooter>
-              <Button>Save changes</Button>
+              <Button>Login</Button>
             </CardFooter>
           </Card>
         </TabsContent>
@@ -56,22 +55,21 @@ export function Logincard() {
             <CardHeader>
               <CardTitle>Password</CardTitle>
               <CardDescription>
-                Change your password here. After saving, you&apos;ll be logged
-                out.
+                Basta Teachers
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
               <div className="grid gap-3">
-                <Label htmlFor="tabs-demo-current">Current password</Label>
-                <Input id="tabs-demo-current" type="password" />
+                <Label htmlFor="tabs-demo-teacher-ID">ID</Label>
+                <Input id="tabs-demo-current" placeholder="123435" />
               </div>
               <div className="grid gap-3">
-                <Label htmlFor="tabs-demo-new">New password</Label>
-                <Input id="tabs-demo-new" type="password" />
+                <Label htmlFor="tabs-demo-teacher-password">Password</Label>
+                <Input id="tabs-demo-new" type="password" placeholder="Password" />
               </div>
             </CardContent>
             <CardFooter>
-              <Button>Save password</Button>
+              <Button>Login</Button>
             </CardFooter>
           </Card>
         </TabsContent>
@@ -80,22 +78,21 @@ export function Logincard() {
             <CardHeader>
               <CardTitle>Password</CardTitle>
               <CardDescription>
-                Change your password here. After saving, you&apos;ll be logged
-                out.
+                Basta Admin
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
               <div className="grid gap-3">
-                <Label htmlFor="tabs-demo-current">Current password</Label>
-                <Input id="tabs-demo-current" type="password" />
+                <Label htmlFor="tabs-demo-admin-current">ID</Label>
+                <Input id="tabs-demo-current" placeholder="ID" />
               </div>
               <div className="grid gap-3">
-                <Label htmlFor="tabs-demo-new">New password</Label>
-                <Input id="tabs-demo-new" type="password" />
+                <Label htmlFor="tabs-demo-admin-new">New password</Label>
+                <Input id="tabs-demo-new" type="password" placeholder="Password" />
               </div>
             </CardContent>
             <CardFooter>
-              <Button>Save password</Button>
+              <Button>Login</Button>
             </CardFooter>
           </Card>
         </TabsContent>
