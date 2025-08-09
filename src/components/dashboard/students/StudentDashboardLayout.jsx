@@ -1,9 +1,12 @@
 import { SiteHeader } from "./SiteHeader";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import { SideBar } from "../../SideBar";
+import { useUser } from "../../../context/User";
+
 
 export default function StudentDashboardLayout() {
+ const { user } = useUser();
  return (
   <SidebarProvider
    style={{
@@ -14,7 +17,7 @@ export default function StudentDashboardLayout() {
    <SideBar variant="inset" />
    <SidebarInset>
     <SiteHeader />
-    <Outlet />
+    {user ? <Outlet /> : <Navigate to="/login" />}
    </SidebarInset>
   </SidebarProvider>
  );

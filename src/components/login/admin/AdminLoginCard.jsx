@@ -10,11 +10,15 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../../context/User";
 
 export default function AdminLoginCard() {
  const navigate = useNavigate();
+ const { setUser, setRole } = useUser()
 
  const gotoAdminDashboard = () => {
+  setUser("Barilin nyo nalang kame")
+  setRole("admin")
   return navigate("/admin_dashboard/enrollment");
  };
 

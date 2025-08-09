@@ -10,6 +10,9 @@ import ManageTeachers from "./components/dashboard/admin/ManageTeachers";
 
 import StudentDashboardLayout from "./components/dashboard/students/StudentDashboardLayout";
 import ManageClearance from "./components/dashboard/students/ManageClearance";
+import ReportCard from "./components/dashboard/students/ReportCard";
+import Subject from "./components/dashboard/students/Subject";
+import Schedule from "./components/dashboard/students/Schedule";
 
 export default function App() {
  return (
@@ -29,6 +32,9 @@ export default function App() {
     {/* Student */}
     <Route path="/student_dashboard" element={<StudentDashboardLayout />}>
      <Route index path="clearance" element={<ManageClearance />} />
+     <Route path="report_card" element={<ReportCard />} />
+     <Route path="schedule" element={<Schedule />} />
+     <Route path="subject" element={<Subject />} />
     </Route>
    </Routes>
   </>

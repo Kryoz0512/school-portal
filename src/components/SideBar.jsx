@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { NavAdmin } from "./dashboard/admin/NavAdmin";
-import { AdminUser } from "./dashboard/admin/AdminUser";
+import { NavStudent } from "./dashboard/students/NavStudent";
+import { NavUser } from "./NavUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
  Sidebar,
@@ -12,42 +13,38 @@ import {
  SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import santorLogo from "../assets/santorlogo.png";
+import { useUser } from "../context/User";
 
-const data = {
- user: {
-  name: "Czianel",
-  email: "Mimician@gmail.com",
-  avatar: "/avatars/shadcn.jpg",
-  role: "admin",
- },
-};
 
 export function SideBar({ ...props }) {
+ const { role } = useUser()
  return (
-  <Sidebar collapsible="offcanvas" {...props}>
+  <Sidebar collapsible="offcanvas"{...props}>
    <SidebarHeader>
     <SidebarMenu>
-     <SidebarMenuItem>
+     <SidebarMenuItem >
       <SidebarMenuButton
        asChild
-       className="data-[slot=sidebar-menu-button]:!p-1.5"
+       className="data-[slot=sidebar-menu-button]:!p-1.5 pointer-events-none h-20 gap-3"
       >
        <Link to={"#"}>
         <Avatar>
          <AvatarImage src={santorLogo} />
          <AvatarFallback>SNHS</AvatarFallback>
         </Avatar>
-        <span>SNHS</span>
+        <span className="text-2xl">SNHS</span>
        </Link>
       </SidebarMenuButton>
      </SidebarMenuItem>
     </SidebarMenu>
    </SidebarHeader>
    <SidebarContent>
-    <NavAdmin />
+    {
+     role === "admin" ? <NavAdmin /> : role === "student" ? <NavStudent /> : <Navigate to="/login" />
+    }
    </SidebarContent>
    <SidebarFooter>
-    <AdminUser user={data.user} />
+    <NavUser />
    </SidebarFooter>
   </Sidebar>
  );

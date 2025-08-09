@@ -9,8 +9,20 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../../context/User";
+
 
 export default function StudentLoginCard() {
+ const navigate = useNavigate()
+ const { setUser, setRole } = useUser()
+
+ const gotoStudentDashboard = () => {
+  setUser("Tata Eco")
+  setRole("student")
+  return navigate("/student_dashboard/clearance")
+ }
+
  return (
   <Card>
    <CardHeader>
@@ -28,7 +40,7 @@ export default function StudentLoginCard() {
     </div>
    </CardContent>
    <CardFooter>
-    <Button>Login</Button>
+    <Button onClick={gotoStudentDashboard}>Login</Button>
    </CardFooter>
   </Card>
  );

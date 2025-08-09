@@ -22,7 +22,7 @@ export default function LoginPage() {
     <img
      src="santor-cover-photo.jpg"
      alt="Santor cover photo"
-     className="absolute inset-0 h-full w-full object-fit dark:brightness-[0.2] dark:grayscale"
+     className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
     />
    </div>
   </div>
