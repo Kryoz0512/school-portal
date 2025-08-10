@@ -29,7 +29,7 @@ export default function ReportCardDialog() {
       <p>85-89: Very Satisfactory</p>
       <p>80-84: Satisfactory</p>
       <p>75-79: Fairly Satisfactory</p>
-      <p>Below 75: OOHHHHH DIBBAAAA NAKAKA PUTANGINAAAAAAAA</p>
+      <p>Below 75: Failed</p>
      </AlertDialogDescription>
     </AlertDialogHeader>
     <AlertDialogFooter>

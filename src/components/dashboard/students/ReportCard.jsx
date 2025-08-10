@@ -122,13 +122,13 @@ function ReportCard() {
               Student Report Card
             </CardTitle>
             <CardDescription>
-              Name: {studentData.studentId}
+              Name: {studentData.name}
             </CardDescription>
             <CardDescription>
-              Student ID: {studentData.name}
+              Student ID: {studentData.studentId}
             </CardDescription>
             <CardDescription>
-              Grade & Section: {studentData.gradeLevel}
+              Grade & Section: {studentData.gradeLevel}  {studentData.section}
             </CardDescription>
             <CardDescription>
               School Year: {studentData.schoolYear}

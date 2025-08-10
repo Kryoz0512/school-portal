@@ -1,6 +1,7 @@
 import { Link, Navigate } from "react-router-dom";
 import { NavAdmin } from "./dashboard/admin/NavAdmin";
 import { NavStudent } from "./dashboard/students/NavStudent";
+import { NavTeacher } from "./dashboard/teachers/NavTeacher";
 import { NavUser } from "./NavUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -40,7 +41,7 @@ export function SideBar({ ...props }) {
    </SidebarHeader>
    <SidebarContent>
     {
-     role === "admin" ? <NavAdmin /> : role === "student" ? <NavStudent /> : <Navigate to="/login" />
+     role === "admin" ? <NavAdmin /> : role === "student" ? <NavStudent /> : role === "teacher" ? <NavTeacher /> : <Navigate to="/login" />
     }
    </SidebarContent>
    <SidebarFooter>

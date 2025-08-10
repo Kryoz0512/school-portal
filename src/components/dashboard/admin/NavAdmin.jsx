@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Link, useLocation } from "react-router-dom";
 
+
 export function NavAdmin() {
  const location = useLocation();
  const isActive = location.pathname;
