@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import {
   Card,
   CardAction,
@@ -16,98 +16,79 @@ import {
   TableRow,
   TableCaption
 } from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import ReportCardDialog from './ReportCardDialog';
-import SelectSchoolYear from './SelectSchoolYear';
 
 const studentData = {
   name: "Juan Dela Cruz",
   studentId: "2024-0001",
-  gradeLevel: "Grade 10",
+  gradeLevel: "Grade 7",
   section: "Einstein",
   schoolYear: "2024-2025",
-  adviser: "Mrs. Maria Santos"
+  adviser: "Mrs. Maria Santos",
+  isCurrentYear: true,
 };
+
 
 const gradesData = [
   {
+    grade: 10,
+    schoolYear: "2024-2025",
     subject: "Mathematics",
     teacher: "Mr. Maria Roberta Bayutdang",
-    firstQuarter: 89,
-    secondQuarter: 91,
+    grades: [79, 75, 88, 90],
+    firstQuarter: 79,
+    secondQuarter: 75,
     thirdQuarter: 88,
     fourthQuarter: 90,
-    finalGrade: 89.5,
+    finalGrade: 0,
     remarks: "Passed"
   },
-  {
-    subject: "Science",
-    teacher: "Ms. Andrei Nico Samonte",
-    firstQuarter: 85,
-    secondQuarter: 70,
-    thirdQuarter: 86,
-    fourthQuarter: 70,
-    finalGrade: 90,
-    remarks: "Passed"
-  },
-  {
-    subject: "English",
-    teacher: "Mrs. Czianel Santos",
-    firstQuarter: 92,
-    secondQuarter: 70,
-    thirdQuarter: 90,
-    fourthQuarter: 70,
-    finalGrade: 90,
-    remarks: "Passed"
-  },
-  {
-    subject: "Filipino",
-    teacher: "Ms. Reiner Panelo",
-    firstQuarter: 88,
-    secondQuarter: 85,
-    thirdQuarter: 87,
-    fourthQuarter: 89,
-    finalGrade: 90,
-    remarks: "Passed"
-  },
-  {
-    subject: "Social Studies",
-    teacher: "Mr. Carmel Berber",
-    firstQuarter: 83,
-    secondQuarter: 85,
-    thirdQuarter: 82,
-    fourthQuarter: 84,
-    finalGrade: 90,
-    remarks: "Passed"
-  },
-  {
-    subject: "Physical Education",
-    teacher: "Mr. Angela Guanio",
-    firstQuarter: 95,
-    secondQuarter: 93,
-    thirdQuarter: 94,
-    fourthQuarter: 96,
-    finalGrade: 90,
-    remarks: "Passed"
-  },
-  {
-    subject: "Music",
-    teacher: "Ms. Jeff Cocjin",
-    firstQuarter: 90,
-    secondQuarter: 92,
-    thirdQuarter: 89,
-    fourthQuarter: 91,
-    finalGrade: 80.5,
-    remarks: "Passed"
-  }
-];
+  // {
+  //   grade: 9,
+  //   schoolYear: "2024-2025",
+  //   subject: "Science",
+  //   teacher: "Ms. Andrei Nico Samonte",
+  //   firstQuarter: 85,
+  //   secondQuarter: 70,
+  //   thirdQuarter: 86,
+  //   fourthQuarter: 70,
+  //   finalGrade: 0,
+  //   remarks: "Passed"
+  // },
+  // {
+  //   grade: 9,
+  //   schoolYear: "2024-2025",
+  //   subject: "Science",
+  //   teacher: "Ms. Andrei Nico Samonte",
+  //   firstQuarter: 85,
+  //   secondQuarter: 70,
+  //   thirdQuarter: 86,
+  //   fourthQuarter: 70,
+  //   finalGrade: 0,
+  //   remarks: "Passed"
+  // },
+]
 
-function calculateAverage(grades) {
-  const sum = grades.reduce((acc, curr) => acc + curr.finalGrade, 0);
-  return (sum / grades.length).toFixed(2);
-}
 
 function ReportCard() {
 
+  const [schoolYear, setSchoolYear] = useState("2024-2025")
+  // const [genAverage, setGenAverage] = useState([]);
+
+  // function addGenAverageMemo(average){
+  //   const newArr = [...genAverage, average]
+
+  //   console.log(newArr);
+
+  //   setGenAverage(newArr);
+  // }
 
   return (
     <>
@@ -116,7 +97,18 @@ function ReportCard() {
           <CardHeader>
             <CardAction className="flex gap-4">
               <ReportCardDialog />
-              <SelectSchoolYear />
+              <Select onValueChange={setSchoolYear} value={schoolYear} defaultValue={schoolYear}>
+                <SelectTrigger className="w-fit">
+                  <SelectValue placeholder="School Year" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="2024-2025">
+                    2024-2025
+                  </SelectItem>
+                  <SelectItem value="2025-2026">2025-2026</SelectItem>
+                  <SelectItem value="2026-2027">2026-2027</SelectItem>
+                </SelectContent>
+              </Select>
             </CardAction>
             <CardTitle>
               Student Report Card
@@ -131,7 +123,7 @@ function ReportCard() {
               Grade & Section: {studentData.gradeLevel}  {studentData.section}
             </CardDescription>
             <CardDescription>
-              School Year: {studentData.schoolYear}
+              School Year: {schoolYear}
             </CardDescription>
             <CardDescription>
               Adviser: {studentData.adviser}
@@ -139,7 +131,13 @@ function ReportCard() {
           </CardHeader>
           <CardContent>
             <Table>
-              <TableCaption className="text-lg">General Average: {calculateAverage(gradesData)}</TableCaption>
+
+              {
+                studentData.schoolYear === schoolYear ? (
+                  // <TableCaption className="text-lg">General Average: {studentData.schoolYear === schoolYear && calculateAverage(gradesData)}</TableCaption>
+                  <TableCaption className="text-lg">General Average: { }</TableCaption>
+                ) : ""
+              }
               <TableHeader>
                 <TableRow>
                   <TableHead>Subject</TableHead>
@@ -147,24 +145,47 @@ function ReportCard() {
                   <TableHead className="text-center">2nd</TableHead>
                   <TableHead className="text-center">3rd</TableHead>
                   <TableHead className="text-center">4th</TableHead>
+                  <TableHead className="text-center">Final Average</TableHead>
                   <TableHead>Teacher</TableHead>
                   <TableHead>Remarks</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {gradesData.map((grade, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="font-medium">{grade.subject}</TableCell>
-                    <TableCell className="text-center">{grade.firstQuarter}</TableCell>
-                    <TableCell className="text-center">{grade.secondQuarter}</TableCell>
-                    <TableCell className="text-center">{grade.thirdQuarter}</TableCell>
-                    <TableCell className="text-center">{grade.fourthQuarter}</TableCell>
-                    <TableCell className="">{grade.teacher}</TableCell>
-                    <TableCell className={`${grade.remarks === "Passed" ? "text-green-600" : "text-red-600"} font-medium`}>
-                      {grade.remarks}
+                {studentData.schoolYear === schoolYear ? (gradesData.map((grade, index) => {
+                  const subjectAve = grade.grades.reduce((a, b) => a + b, 0) / grade.grades.length
+
+                  // useMemo(() => addGenAverageMemo(average), [average]);
+
+                  return (
+                    grade.schoolYear === schoolYear && (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">{grade.subject}</TableCell>
+                        {
+                          grade.grades.map((g) => {
+                            return (
+                              <TableCell key={g} className="text-center">{g}</TableCell>
+
+                            )
+                          })
+                        }
+                        <TableCell className="text-center">{subjectAve}</TableCell>
+                        {/* <TableCell className="text-center">{calculateAverage()}</TableCell> */}
+                        <TableCell className="">{grade.teacher}</TableCell>
+                        <TableCell className={`${grade.remarks === "Passed" ? "text-green-600" : "text-red-600"} font-medium`}>
+                          {grade.remarks}
+                        </TableCell>
+                      </TableRow>
+
+                    )
+                  )
+                })) : (
+                  <TableRow>
+                    <TableCell colSpan={7} className="text-center">
+                      No Data
                     </TableCell>
                   </TableRow>
-                ))}
+                )
+                }
               </TableBody>
             </Table>
           </CardContent>
