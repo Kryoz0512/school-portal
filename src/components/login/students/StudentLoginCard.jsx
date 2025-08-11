@@ -18,7 +18,7 @@ export default function StudentLoginCard() {
  const { setUser, setRole } = useUser()
 
  const gotoStudentDashboard = () => {
-  setUser("Tata Eco")
+  setUser("Mel Moses Seeping")
   setRole("student")
   return navigate("/student_dashboard/clearance")
  }

@@ -14,11 +14,11 @@ import { useUser } from "../../../context/User";
 
 export default function AdminLoginCard() {
  const navigate = useNavigate();
- const { setUser, setRole } = useUser()
+ const { setUser, setRole } = useUser();
 
  const gotoAdminDashboard = () => {
-  setUser("Barilin nyo nalang kame")
-  setRole("admin")
+  setUser("Czianel Santos");
+  setRole("admin");
   return navigate("/admin_dashboard/enrollment");
  };
 

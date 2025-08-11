@@ -8,28 +8,27 @@ import {
 } from "@/components/ui/sidebar";
 import { Link, useLocation } from "react-router-dom";
 
-
 const navTeacher = [
  {
   name: "Manage Students",
   path: "/teacher_dashboard/manage_students",
   link: "manage_students",
-  icon: Users
+  icon: Users,
  },
  {
   name: "Sections",
   path: "/teacher_dashboard/sections",
   link: "sections",
-  icon: School
+  icon: School,
  },
 
  {
   name: "Schedule",
   path: "/teacher_dashboard/schedule",
   link: "schedule",
-  icon: Sheet
- }
-]
+  icon: Sheet,
+ },
+];
 
 export function NavTeacher() {
  const location = useLocation();
@@ -38,14 +37,18 @@ export function NavTeacher() {
   <SidebarGroup>
    <SidebarGroupContent className="flex flex-col gap-2">
     <SidebarMenu className="gap-3">
-     {navTeacher.map((nt) => {
-      const isActive = location.pathname === nt.path;
+     {navTeacher.map((item) => {
+      const isActive = location.pathname === item.path;
       return (
-       <Link to={nt.link} key={nt.link}>
-        <SidebarMenuItem key={nt.name}>
-         <SidebarMenuButton isActive={isActive} tooltip={nt.name}>
-          {nt.icon && <nt.icon />}
-          <span>{nt.name}</span>
+       <Link to={item.link} key={item.link}>
+        <SidebarMenuItem key={item.name}>
+         <SidebarMenuButton
+          className="cursor-pointer"
+          isActive={isActive}
+          tooltip={item.name}
+         >
+          {item.icon && <item.icon />}
+          <span>{item.name}</span>
          </SidebarMenuButton>
         </SidebarMenuItem>
        </Link>
@@ -53,6 +56,6 @@ export function NavTeacher() {
      })}
     </SidebarMenu>
    </SidebarGroupContent>
-  </SidebarGroup >
+  </SidebarGroup>
  );
 }

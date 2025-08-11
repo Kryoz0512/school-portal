@@ -8,6 +8,38 @@ import {
 } from "@/components/ui/sidebar";
 import { Link, useLocation } from "react-router-dom";
 
+const navAdmin = [
+ {
+  name: "Enrollment",
+  path: "/admin_dashboard/enrollment",
+  link: "enrollment",
+  icon: BookOpenText,
+ },
+ {
+  name: "Manage Students",
+  path: "/admin_dashboard/students",
+  link: "students",
+  icon: Users,
+ },
+ {
+  name: "Manage Teachers",
+  path: "/admin_dashboard/teachers",
+  link: "teachers",
+  icon: ContactRound,
+ },
+ {
+  name: "Manage Section",
+  path: "/admin_dashboard/teachers",
+  link: "sections",
+  icon: School,
+ },
+ {
+  name: "Manage Schedule",
+  path: "/admin_dashboard/schedule",
+  link: "schedule",
+  icon: Sheet,
+ },
+];
 
 export function NavAdmin() {
  const location = useLocation();
@@ -17,75 +49,23 @@ export function NavAdmin() {
   <SidebarGroup>
    <SidebarGroupContent className="flex flex-col gap-2">
     <SidebarMenu className="gap-3">
-     {/* Enrollment */}
-     <SidebarMenuItem>
-      <Link to={"enrollment"}>
-       <SidebarMenuButton
-        isActive={isActive === "/admin_dashboard/enrollment"}
-        className="cursor-pointer"
-        tooltip={"Enrollment"}
-       >
-        <BookOpenText />
-        <span>Enrollment</span>
-       </SidebarMenuButton>
-      </Link>
-     </SidebarMenuItem>
-
-     {/* Manage Students */}
-     <SidebarMenuItem>
-      <Link to={"students"}>
-       <SidebarMenuButton
-        isActive={isActive === "/admin_dashboard/students"}
-        className="cursor-pointer"
-        tooltip={"Manage Students"}
-       >
-        <Users />
-        <span>Manage Students</span>
-       </SidebarMenuButton>
-      </Link>
-     </SidebarMenuItem>
-
-     {/* Manage Teachers */}
-     <SidebarMenuItem>
-      <Link to={"teachers"}>
-       <SidebarMenuButton
-        className="cursor-pointer"
-        tooltip={"Manage Teachers"}
-        isActive={isActive === "/admin_dashboard/teachers"}
-       >
-        <ContactRound />
-        <span>Manage Teachers </span>
-       </SidebarMenuButton>
-      </Link>
-     </SidebarMenuItem>
-
-     {/* Manage Section */}
-     <SidebarMenuItem>
-      <Link to={"sections"}>
-       <SidebarMenuButton
-        className="cursor-pointer"
-        tooltip={"Manage Section"}
-        isActive={isActive === "/admin_dashboard/sections"}
-       >
-        <School />
-        <span>Manage Sections</span>
-       </SidebarMenuButton>
-      </Link>
-     </SidebarMenuItem>
-
-     {/* Manage Schedule */}
-     <SidebarMenuItem>
-      <Link to={"schedule"}>
-       <SidebarMenuButton
-        className="cursor-pointer"
-        tooltip={"Manage Schedule"}
-        isActive={isActive === "/admin_dashboard/schedule"}
-       >
-        <Sheet />
-        <span>Manage Schedule</span>
-       </SidebarMenuButton>
-      </Link>
-     </SidebarMenuItem>
+     {navAdmin.map((item) => {
+      const isActive = location.pathname === item.path;
+      return (
+       <Link to={item.link} key={item.link}>
+        <SidebarMenuItem key={item.name}>
+         <SidebarMenuButton
+          className="cursor-pointer"
+          isActive={isActive}
+          tooltip={item.name}
+         >
+          {item.icon && <item.icon />}
+          <span>{item.name}</span>
+         </SidebarMenuButton>
+        </SidebarMenuItem>
+       </Link>
+      );
+     })}
     </SidebarMenu>
    </SidebarGroupContent>
   </SidebarGroup>
