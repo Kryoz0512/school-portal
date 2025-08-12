@@ -35,16 +35,16 @@ const scheduleData = [
  {
   time: '7:30 AM - 8:30 AM',
   Monday: { subject: 'Mathematics 101', room: 'Room 101', section: "Grade 7 Seeping" },
-  Tuesday: { subject: 'Geometry', room: 'Room 205', section: "Grade 7 Berber" },
-  Wednesday: { subject: 'Mathematics 101', room: 'Lab 101', section: "Grade 8 Tejano" },
+  Tuesday: { subject: 'Mathematics 101', room: 'Room 205', section: "Grade 7 Berber" },
+  Wednesday: { subject: 'Algebra', room: 'Lab 101', section: "Grade 8 Tejano" },
   Thursday: { subject: 'Algebra', room: 'Room 102', section: "Grade 8 Guanio" },
-  Friday: { subject: 'Mathematics 101', room: 'Room 103', section: "Grade 9 Santos" }
+  Friday: { subject: 'Geometry', room: 'Room 103', section: "Grade 9 Santos" }
  },
  {
   time: '8:35 AM - 9:35 AM',
-  Monday: { subject: 'Algebra', room: 'Room 205', section: "Grade 9 Bayudang" },
-  Tuesday: { subject: 'Mathematics 101', room: 'Lab 101', section: "Grade 10 MMACC" },
-  Wednesday: { subject: 'Algebra', room: 'Room 101', section: "Grade 10 MMARCC" },
+  Monday: { subject: 'Geometry', room: 'Room 205', section: "Grade 9 Bayudang" },
+  Tuesday: { subject: 'Trigonometry', room: 'Lab 101', section: "Grade 10 MMACC" },
+  Wednesday: { subject: 'Trigonometry', room: 'Room 101', section: "Grade 10 MMARCC" },
   Thursday: { subject: 'Mathematics 101', room: 'Room 207', section: "Grade 7 Seeping" },
   Friday: { subject: 'Algebra', room: 'Room 207', section: "Grade 8 Tejano" }
  },
