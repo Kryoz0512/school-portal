@@ -14,7 +14,6 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  TableCaption
 } from "@/components/ui/table"
 import {
   Dialog,
@@ -65,7 +64,7 @@ const trialStudents = [
 ];
 
 const quarters = ["Q1", "Q2", "Q3", "Q4"];
-const isMaintenance = false
+const isMaintenance = false;
 
 export default function TeacherManageStudents() {
   if (isMaintenance) {
@@ -80,12 +79,12 @@ export default function TeacherManageStudents() {
 
   const handleCellClicked = (studentIndex, field) => {
     setSelectedCell({ studentIndex, field });
-    setEditedValue(students[studentIndex][field]);
+    setEditedValue(students[studentIndex].grades[field]);
   };
 
   const handleSave = () => {
     const updatedStudents = [...students];
-    updatedStudents[selectedCell.studentIndex][selectedCell.field] = editedValue;
+    updatedStudents[selectedCell.studentIndex].grades[selectedCell.field] = editedValue;
     setStudents(updatedStudents);
     setSelectedCell(null);
   };
@@ -108,7 +107,6 @@ export default function TeacherManageStudents() {
     { label: "Grade 7 - Section Seeping", year: "2024-2025", section: "Grade 7 - Section Seeping" },
   ];
 
-
   return (
     <div className="p-4 space-y-4">
       <div>
@@ -128,42 +126,11 @@ export default function TeacherManageStudents() {
         </Select>
       </div>
 
-      {quarters.map((quarter) => (
-        <Card key={quarter}>
-          <CardContent>
-            <CardHeader>
-              <CardTitle>Manage Students</CardTitle>
-              <CardDescription>Quarter: {quarter}</CardDescription>
-            </CardHeader>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>ID</TableHead>
-                  <TableHead>NAME</TableHead>
-                  <TableHead>SUBJECT</TableHead>
-                  <TableHead>GRADE</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredStudents.map((student, index) => (
-                  <TableRow key={student.id}>
-                    <TableCell>{student.id}</TableCell>
-                    <TableCell>{student.name}</TableCell>
-                    <TableCell>{student.subject}</TableCell>
-                    <TableCell onClick={() => handleCellClicked(index, "grade")}>{student.grades[quarter]}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-      ))}
-
       <Card>
         <CardContent>
           <CardHeader>
-            <CardTitle>Trial</CardTitle>
-            <CardDescription>Trial Description</CardDescription>
+            <CardTitle>Manage Students</CardTitle>
+            <CardDescription>Grades per Quarter</CardDescription>
           </CardHeader>
           <Table>
             <TableHeader>
@@ -171,15 +138,27 @@ export default function TeacherManageStudents() {
                 <TableHead>ID</TableHead>
                 <TableHead>NAME</TableHead>
                 <TableHead>SUBJECT</TableHead>
-                <TableHead>GRADE</TableHead>
+                {quarters.map((quarter) => (
+                  <TableHead key={quarter}>{quarter}</TableHead>
+                ))}
+                <TableHead>AVERAGE</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredStudents.map((student) => (
+              {filteredStudents.map((student, index) => (
                 <TableRow key={student.id}>
                   <TableCell>{student.id}</TableCell>
                   <TableCell>{student.name}</TableCell>
                   <TableCell>{student.subject}</TableCell>
+                  {quarters.map((quarter) => (
+                    <TableCell
+                      key={quarter}
+                      onClick={() => handleCellClicked(index, q)}
+                      className="cursor-pointer hover:bg-gray-100"
+                    >
+                      {student.grades[quarter]}
+                    </TableCell>
+                  ))}
                   <TableCell>{calculateAverage(student.grades)}</TableCell>
                 </TableRow>
               ))}
@@ -194,13 +173,13 @@ export default function TeacherManageStudents() {
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Edit {selectedCell.field}</DialogTitle>
-              <DialogDescription>TRIAL DESCRIPTION</DialogDescription>
+              <DialogDescription>Update the grade for the selected quarter.</DialogDescription>
             </DialogHeader>
             <Input
               value={editedValue}
               onChange={(e) => setEditedValue(e.target.value)}
             />
-            <div className='flex gap-4'>
+            <div className='flex gap-4 mt-4'>
               <Button variant="outline" onClick={() => setSelectedCell(null)}>
                 Cancel
               </Button>
