@@ -36,11 +36,11 @@ import { Button } from "@/components/ui/button"
 
 const trialStudents = [
   {
-    id: "2025001",
+    id: "2024-001",
     name: "Mike Schmidt",
-    section: "Grade 7 - Section Santos",
+    section: "Grade 7 Seeping",
     year: "2024-2025",
-    subject: "English",
+    subject: "Basic English",
     grades: {
       Q1: "90",
       Q2: "88",
@@ -48,17 +48,114 @@ const trialStudents = [
       Q4: "91"
     }
   },
-  {
-    id: "2025002",
-    name: "Elizabeth Afton",
-    section: "Grade 7 - Section Seeping",
+
+    {
+    id: "2024-002",
+    name: "Bangalore",
+    section: "Grade 7 Berber",
     year: "2024-2025",
-    subject: "English",
+    subject: "Basic English",
+    grades: {
+      Q1: "93",
+      Q2: "84",
+      Q3: "98",
+      Q4: "95"
+    }
+  },
+  
+  
+  {
+    id: "2025-001",
+    name: "Elizabeth Afton",
+    section: "Grade 8 Guanio",
+    year: "2025-2026",
+    subject: "Grammar",
     grades: {
       Q1: "95",
       Q2: "93",
       Q3: "96",
       Q4: "94"
+    }
+  },
+  {
+    id: "2025-002",
+    name: "John Cena",
+    section: "Grade 8 Tejano",
+    year: "2025-2026",
+    subject: "Grammar",
+    grades: {
+      Q1: "92",
+      Q2: "91",
+      Q3: "90",
+      Q4: "99"
+    }
+  },
+
+    {
+    id: "2026-001",
+    name: "Cici",
+    section: "Grade 9 Bayudang",
+    year: "2026-2027",
+    subject: "Punctuation",
+    grades: {
+      Q1: "88",
+      Q2: "87",
+      Q3: "78",
+      Q4: "98"
+    }
+  },
+
+  {
+    id: "2026-002",
+    name: "Riven",
+    section: "Grade 9 Santos",
+    year: "2026-2027",
+    subject: "Punctuation",
+    grades: {
+      Q1: "98",
+      Q2: "97",
+      Q3: "88",
+      Q4: "97"
+    }
+  },
+
+     {
+    id: "2026-003",
+    name: "Michael Jordan",
+    section: "Grade 9 Santos",
+    year: "2026-2027",
+    subject: "Punctuation",
+    grades: {
+      Q1: "98",
+      Q2: "97",
+      Q3: "88",
+      Q4: "97"
+    }
+  },   
+  {
+    id: "2027-001",
+    name: "Michael Jackson",
+    section: "Grade 10 MMARCC",
+    year: "2027-2028",
+    subject: "Advance English",
+    grades: {
+      Q1: "93",
+      Q2: "95",
+      Q3: "97",
+      Q4: "87"
+    }
+  },
+  {
+    id: "2027-002",
+    name: "Billie Eilish",
+    section: "Grade 10 MMACC",
+    year: "2027-2028",
+    subject: "Advance English",
+    grades: {
+      Q1: "92",
+      Q2: "95",
+      Q3: "91",
+      Q4: "96"
     }
   }
 ];
@@ -102,9 +199,13 @@ export default function TeacherManageStudents() {
   });
 // kung ano ung nakalagay sa  json na year and section, un din dapat andto
   const selectOptions = [
-    { label: "All", year: "All", section: "All" },
-    { label: "Grade 7 - Section Santos", year: "2024-2025", section: "Grade 7 - Section Santos" },
-    { label: "Grade 7 - Section Seeping", year: "2024-2025", section: "Grade 7 - Section Seeping" },
+
+    { label: "Grade 7 Berber", year: "2024-2025", section: "Grade 7 Berber" },
+    { label: "Grade 7 Seeping", year: "2024-2025", section: "Grade 7 Seeping" },
+    { label: "Grade 8 Guanio", year: "2025-2026", section: "Grade 8 Guanio" },
+    { label: "Grade 9 Santos", year: "2026-2027", section: "Grade 9 Santos" },
+    { label: "Grade 9 Bayudang", year: "2026-2027", section: "Grade 9 Bayudang" },
+    { label: "Grade 10 MMARC", year: "2027-2028", section: "Grade 10 MMARCC" },
   ];
 
   return (
