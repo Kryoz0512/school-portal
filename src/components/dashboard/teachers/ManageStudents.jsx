@@ -101,7 +101,7 @@ export default function TeacherManageStudents() {
     const yearMatch = selectedYear === "All" || student.year === selectedYear;
     return sectionMatch && yearMatch;
   });
-
+// kung ano ung nakalagay sa  json na year and section, un din dapat andto
   const selectOptions = [
     { label: "All", year: "All", section: "All" },
     { label: "Grade 7 - Section Santos", year: "2024-2025", section: "Grade 7 - Section Santos" },
