@@ -16,128 +16,199 @@ import {
   TableRow,
   TableCaption
 } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+
+const trialStudents = [
+  {
+    id: "2025001",
+    name: "Mike Schmidt",
+    section: "Grade 7 - Section Santos",
+    year: "2024-2025",
+    subject: "English",
+    grades: {
+      Q1: "90",
+      Q2: "88",
+      Q3: "92",
+      Q4: "91"
+    }
+  },
+  {
+    id: "2025002",
+    name: "Elizabeth Afton",
+    section: "Grade 7 - Section Seeping",
+    year: "2024-2025",
+    subject: "English",
+    grades: {
+      Q1: "95",
+      Q2: "93",
+      Q3: "96",
+      Q4: "94"
+    }
+  }
+];
+
+const quarters = ["Q1", "Q2", "Q3", "Q4"];
 const isMaintenance = false
 
-const sections = ["A", "B", "C", "D"]
-const subjects = ["Math", "Science", "English", "History"]
-
-const dummyStudents = [
-  { id: 1, name: "Granger", grade: "Grade 10", section: "A", subject: "Math", status: "Active" },
-  { id: 2, name: "Minotaur", grade: "Grade 9", section: "B", subject: "Science", status: "Inactive" },
-  { id: 3, name: "Miya", grade: "Grade 7", section: "C", subject: "English", status: "Active" },
-  { id: 4, name: "Layla", grade: "Grade 1000", section: "D", subject: "History", status: "Active" },
-  { id: 5, name: "Lapu-Lapu", grade: "Grade 10", section: "A", subject: "Science", status: "Active" },
-  { id: 6, name: "Badang", grade: "Grade 10", section: "A", subject: "Science", status: "Active" },
-  { id: 7, name: "Selena", grade: "Grade 10", section: "A", subject: "Science", status: "Active" },
-  { id: 8, name: "Nana", grade: "Grade 10", section: "A", subject: "Science", status: "Active" },
-]
-
 export default function TeacherManageStudents() {
-  const [selectedSection, setSelectedSection] = useState(null)
-  const [selectedSubject, setSelectedSubject] = useState(null)
-
   if (isMaintenance) {
     return <UnderMaintenance />
   }
 
-  const filteredStudents = dummyStudents.filter(student => {
-    return (
-      (!selectedSection || student.section === selectedSection) &&
-      (!selectedSubject || student.subject === selectedSubject)
-    )
-  })
+  const [students, setStudents] = useState(trialStudents);
+  const [selectedCell, setSelectedCell] = useState(null);
+  const [editedValue, setEditedValue] = useState("");
+  const [selectedSection, setSelectedSection] = useState("All");
+  const [selectedYear, setSelectedYear] = useState("All");
+
+  const handleCellClicked = (studentIndex, field) => {
+    setSelectedCell({ studentIndex, field });
+    setEditedValue(students[studentIndex][field]);
+  };
+
+  const handleSave = () => {
+    const updatedStudents = [...students];
+    updatedStudents[selectedCell.studentIndex][selectedCell.field] = editedValue;
+    setStudents(updatedStudents);
+    setSelectedCell(null);
+  };
+
+  const calculateAverage = (grades) => {
+    const values = Object.values(grades).map(Number);
+    const total = values.reduce((sum, val) => sum + val, 0);
+    return (total / values.length).toFixed(2);
+  };
+
+  const filteredStudents = students.filter((student) => {
+    const sectionMatch = selectedSection === "All" || student.section === selectedSection;
+    const yearMatch = selectedYear === "All" || student.year === selectedYear;
+    return sectionMatch && yearMatch;
+  });
+
+  const selectOptions = [
+    { label: "All", year: "All", section: "All" },
+    { label: "Grade 7 - Section Santos", year: "2024-2025", section: "Grade 7 - Section Santos" },
+    { label: "Grade 7 - Section Seeping", year: "2024-2025", section: "Grade 7 - Section Seeping" },
+  ];
 
 
   return (
-    <div className="p-6 spacce-y-6">
+    <div className="p-4 space-y-4">
+      <div>
+        <Select onValueChange={(value) => {
+          const selected = selectOptions.find(opt => opt.label === value);
+          setSelectedSection(selected.section);
+          setSelectedYear(selected.year);
+        }}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Section & Year" />
+          </SelectTrigger>
+          <SelectContent>
+            {selectOptions.map((opt) => (
+              <SelectItem key={opt.label} value={opt.label}>{opt.label}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      {quarters.map((quarter) => (
+        <Card key={quarter}>
+          <CardContent>
+            <CardHeader>
+              <CardTitle>Manage Students</CardTitle>
+              <CardDescription>Quarter: {quarter}</CardDescription>
+            </CardHeader>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>ID</TableHead>
+                  <TableHead>NAME</TableHead>
+                  <TableHead>SUBJECT</TableHead>
+                  <TableHead>GRADE</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredStudents.map((student, index) => (
+                  <TableRow key={student.id}>
+                    <TableCell>{student.id}</TableCell>
+                    <TableCell>{student.name}</TableCell>
+                    <TableCell>{student.subject}</TableCell>
+                    <TableCell onClick={() => handleCellClicked(index, "grade")}>{student.grades[quarter]}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      ))}
+
       <Card>
-        <CardHeader>
-          <CardTitle>Manage Students</CardTitle>
-          <CardDescription>Select a section and subject to view kupals</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className='flex flex-col gap-4'>
-            <div>
-              <h4 className='font-semibold mb-2'>Section Tite</h4>
-              <div className='flex gap-2 flex-wrap'>
-                {sections.map(section => (
-                  <Button
-                    key={section}
-                    variant={selectedSection === section ? "default" : "outline"}
-                    onClick={() => setSelectedSection(section)}
-                  >
-                    {section}
-                  </Button>
-                ))}
-              </div>
-            </div>
-
-            <Separator />
-
-            <div>
-              <h4 className='font-semibold mb-2'>Subject</h4>
-              <div className='flex gap-2 flex-wrap'>
-                {subjects.map(subject => (
-                  <Button
-                    key={subject}
-                    variant={selectedSubject === subject ? "default" : "outline"}
-                    onClick={() => setSelectedSubject(subject)}
-                  >
-                    {subject}
-                  </Button>
-                ))}
-              </div>
-            </div>
-
-            <Separator />
-
-            <div>
-              <Button
-                variant="ghost"
-                onClick={() => {
-                  setSelectedSection(null)
-                  setSelectedSubject(null)
-                }}
-              >
-                Clear Filter
-              </Button>
-            </div>
-          </div>
-
+        <CardContent>
+          <CardHeader>
+            <CardTitle>Trial</CardTitle>
+            <CardDescription>Trial Description</CardDescription>
+          </CardHeader>
           <Table>
-            <TableCaption>
-              {filteredStudents.length > 0
-                ? `Showing ${filteredStudents.length} students`
-                : "No students found"}
-            </TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead>ID</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Grade</TableHead>
-                <TableHead>Section</TableHead>
-                <TableHead>Subject</TableHead>
-                <TableHead>Status</TableHead>
+                <TableHead>NAME</TableHead>
+                <TableHead>SUBJECT</TableHead>
+                <TableHead>GRADE</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredStudents.map(student => (
+              {filteredStudents.map((student) => (
                 <TableRow key={student.id}>
                   <TableCell>{student.id}</TableCell>
                   <TableCell>{student.name}</TableCell>
-                  <TableCell>{student.grade}</TableCell>
-                  <TableCell>{student.section}</TableCell>
                   <TableCell>{student.subject}</TableCell>
-                  <TableCell>{student.status}</TableCell>
+                  <TableCell>{calculateAverage(student.grades)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </CardContent>
       </Card>
+
+      {selectedCell && (
+        <Dialog open={true} onOpenChange={() => setSelectedCell(null)}>
+          <DialogTrigger>Open</DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Edit {selectedCell.field}</DialogTitle>
+              <DialogDescription>TRIAL DESCRIPTION</DialogDescription>
+            </DialogHeader>
+            <Input
+              value={editedValue}
+              onChange={(e) => setEditedValue(e.target.value)}
+            />
+            <div className='flex gap-4'>
+              <Button variant="outline" onClick={() => setSelectedCell(null)}>
+                Cancel
+              </Button>
+              <Button onClick={handleSave}>Save</Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
-  )
+  );
 }
