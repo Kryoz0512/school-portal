@@ -17,7 +17,7 @@ import Schedule from "./components/dashboard/students/Schedule";
 import TeacherDashboardLayout from "./components/dashboard/teachers/TeacherDashboardLayout";
 import TeacherManageStudents from "./components/dashboard/teachers/ManageStudents";
 import TeacherSchedule  from "./components/dashboard/teachers/Schedule";
-import TeacherSection from "./components/dashboard/teachers/Section";
+
 
 
 export default function App() {
@@ -47,7 +47,6 @@ export default function App() {
     <Route path="/teacher_dashboard" element={<TeacherDashboardLayout/>}>
      <Route index path="manage_students" element={<TeacherManageStudents />} />
      <Route path="schedule" element={<TeacherSchedule/>}/>
-     <Route path="sections" element={<TeacherSection/>}/>
     </Route>
 
    </Routes>

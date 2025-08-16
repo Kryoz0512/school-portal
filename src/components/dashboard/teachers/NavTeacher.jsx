@@ -16,13 +16,6 @@ const navTeacher = [
   icon: Users,
  },
  {
-  name: "Sections",
-  path: "/teacher_dashboard/sections",
-  link: "sections",
-  icon: School,
- },
-
- {
   name: "Schedule",
   path: "/teacher_dashboard/schedule",
   link: "schedule",

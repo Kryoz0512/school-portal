@@ -72,7 +72,7 @@ const gradesData = [
   finalGrade: 0,
   remarks: "Passed",
  },
-  {
+ {
   grade: "Grade 7 Seeping",
   schoolYear: "2022-2023",
   subject: "Biology",
@@ -82,7 +82,7 @@ const gradesData = [
   finalGrade: 0,
   remarks: "Passed",
  },
-  {
+ {
   grade: "Grade 7 Seeping",
   schoolYear: "2022-2023",
   subject: "Basic English",
@@ -92,13 +92,12 @@ const gradesData = [
   finalGrade: 0,
   remarks: "Passed",
  },
- 
-  {
+ {
   grade: "Grade 8 Guanio",
   schoolYear: "2023-2024",
   subject: "Algebra",
   teacher: "Mr. Mel Moses Seeping",
-  adviser: "Ms. Angela Marie Guanio", 
+  adviser: "Ms. Angela Marie Guanio",
   grades: [91, 92, 83, 89],
   finalGrade: 0,
   remarks: "Passed",
@@ -113,32 +112,32 @@ const gradesData = [
   finalGrade: 0,
   remarks: "Passed",
  },
-  {
+ {
   grade: "Grade 8 Guanio",
   schoolYear: "2023-2024",
   subject: "Grammar",
   teacher: "Mr. Czianel Santos",
-  adviser: "Ms. Angela Marie Guanio", 
+  adviser: "Ms. Angela Marie Guanio",
   grades: [79, 98, 85, 88],
   finalGrade: 0,
   remarks: "Passed",
  },
-  {
+ {
   grade: "Grade 9 Santos",
   schoolYear: "2024-2025",
   subject: "Geometry",
   teacher: "Mr. Mel Moses Seeping",
-  adviser: "Mr. Czianel Santos", 
+  adviser: "Mr. Czianel Santos",
   grades: [97, 87, 92, 91],
   finalGrade: 0,
   remarks: "Passed",
  },
-  {
+ {
   grade: "Grade 9 Santos",
   schoolYear: "2024-2025",
   subject: "Chemistry",
   teacher: "Ms. Angela Marie Guanio",
-  adviser: "Mr. Czianel Santos", 
+  adviser: "Mr. Czianel Santos",
   grades: [82, 93, 99, 89],
   finalGrade: 0,
   remarks: "Passed",
@@ -163,12 +162,12 @@ const gradesData = [
   finalGrade: 0,
   remarks: "Passed",
  },
-  {
+ {
   grade: "Grade 10 MMARCC",
   schoolYear: "2025-2026",
   subject: "Astrology",
   teacher: "Ms. Angela Marie Guanio",
-  adviser: "Mr. Mark Robert Bayudang", 
+  adviser: "Mr. Mark Robert Bayudang",
   grades: [93, 92, 81, 89],
   finalGrade: 0,
   remarks: "Passed",
@@ -179,7 +178,7 @@ const gradesData = [
   schoolYear: "2025-2026",
   subject: "Advance English",
   teacher: "Mr. Czianel Santos",
-  adviser: "Mr. Mark Robert Bayudang", 
+  adviser: "Mr. Mark Robert Bayudang",
   grades: [99, 92, 87, 85],
   finalGrade: 0,
   remarks: "Passed",
@@ -191,7 +190,7 @@ function ReportCard() {
  const [selectedSchoolYear, setSelectedSchoolYear] = useState(currentYear);
 
  const fileteredGrades = gradesData.filter(
-  (item) => item.schoolYear == selectedSchoolYear
+  (item) => item.schoolYear === selectedSchoolYear
  );
 
  const updatedGradesData = fileteredGrades.map((item) => {
@@ -275,9 +274,8 @@ function ReportCard() {
            <TableCell className="text-center">{item.finalGrade}</TableCell>
            <TableCell>{item.teacher}</TableCell>
            <TableCell
-            className={`${
-             item.remarks === "Passed" ? "text-green-500" : "text-red-500"
-            } font-medium`}
+            className={`${item.remarks === "Passed" ? "text-green-500" : "text-red-500"
+             } font-medium`}
            >
             {item.remarks}
            </TableCell>

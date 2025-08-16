@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import UnderMaintenance from '../../UnderMaintenance'
+import { useState } from 'react'
 import {
   Card,
   CardContent,
@@ -16,279 +15,274 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import EditGradeDialog from './EditGradeDialog'
 
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-
-const trialStudents = [
+const studentData = [
   {
-    id: "2024-001",
-    name: "Mike Schmidt",
-    section: "Grade 7 Seeping",
-    year: "2024-2025",
+    name: "Ivan Reiner Panelo",
+    studentID: "2025-001",
+    grade: "Grade 7 Seeping",
     subject: "Basic English",
-    grades: {
-      Q1: "90",
-      Q2: "88",
-      Q3: "92",
-      Q4: "91"
-    }
+    grades: [
+      {
+        firstQuarter: "90",
+        secondQuarter: "90",
+        thirdQuarter: "90",
+        fourthQuarter: "90",
+      }
+    ],
   },
-
-    {
-    id: "2024-002",
-    name: "Bangalore",
-    section: "Grade 7 Berber",
-    year: "2024-2025",
+  {
+    name: "Jeff Eric Cocjin",
+    studentID: "2025-002",
+    grade: "Grade 7 Seeping",
     subject: "Basic English",
-    grades: {
-      Q1: "93",
-      Q2: "84",
-      Q3: "98",
-      Q4: "95"
-    }
+    grades: [
+      {
+        firstQuarter: "30",
+        secondQuarter: "30",
+        thirdQuarter: "30",
+        fourthQuarter: "85",
+      }
+    ],
   },
-  
-  
   {
-    id: "2025-001",
-    name: "Elizabeth Afton",
-    section: "Grade 8 Guanio",
-    year: "2025-2026",
+    name: "Nico Samonte",
+    studentID: "2024-001",
+    grade: "Grade 8 Guanio",
     subject: "Grammar",
-    grades: {
-      Q1: "95",
-      Q2: "93",
-      Q3: "96",
-      Q4: "94"
-    }
+    grades: [
+      {
+        firstQuarter: "90",
+        secondQuarter: "80",
+        thirdQuarter: "78",
+        fourthQuarter: "97",
+      }
+    ],
   },
   {
-    id: "2025-002",
-    name: "John Cena",
-    section: "Grade 8 Tejano",
-    year: "2025-2026",
+    name: "Cassandra Miranda",
+    studentID: "2024-002",
+    grade: "Grade 8 Tejano",
     subject: "Grammar",
-    grades: {
-      Q1: "92",
-      Q2: "91",
-      Q3: "90",
-      Q4: "99"
-    }
+    grades: [
+      {
+        firstQuarter: "100",
+        secondQuarter: "90",
+        thirdQuarter: "98",
+        fourthQuarter: "97",
+      }
+    ],
+    average: "",
   },
-
-    {
-    id: "2026-001",
-    name: "Cici",
-    section: "Grade 9 Bayudang",
-    year: "2026-2027",
-    subject: "Punctuation",
-    grades: {
-      Q1: "88",
-      Q2: "87",
-      Q3: "78",
-      Q4: "98"
-    }
-  },
-
   {
-    id: "2026-002",
-    name: "Riven",
-    section: "Grade 9 Santos",
-    year: "2026-2027",
+    name: "JC Ocampo",
+    studentID: "2023-001",
+    grade: "Grade 9 Bayudang",
     subject: "Punctuation",
-    grades: {
-      Q1: "98",
-      Q2: "97",
-      Q3: "88",
-      Q4: "97"
-    }
+    grades: [
+      {
+        firstQuarter: "90",
+        secondQuarter: "83",
+        thirdQuarter: "88",
+        fourthQuarter: "96",
+      }
+    ],
   },
-
-     {
-    id: "2026-003",
-    name: "Michael Jordan",
-    section: "Grade 9 Santos",
-    year: "2026-2027",
-    subject: "Punctuation",
-    grades: {
-      Q1: "98",
-      Q2: "97",
-      Q3: "88",
-      Q4: "97"
-    }
-  },   
   {
-    id: "2027-001",
-    name: "Michael Jackson",
-    section: "Grade 10 MMARCC",
-    year: "2027-2028",
+    name: "Shandler Canoza",
+    studentID: "2023-002",
+    grade: "Grade 9 Santos",
+    subject: "Punctuation",
+    grades: [
+      {
+        firstQuarter: "95",
+        secondQuarter: "93",
+        thirdQuarter: "98",
+        fourthQuarter: "96",
+      }
+    ],
+  },
+  {
+    name: "Nina Nambio",
+    studentID: "2022-001",
+    grade: "Grade 10 MMACC",
     subject: "Advance English",
-    grades: {
-      Q1: "93",
-      Q2: "95",
-      Q3: "97",
-      Q4: "87"
-    }
+    grades: [
+      {
+        firstQuarter: "97",
+        secondQuarter: "87",
+        thirdQuarter: "88",
+        fourthQuarter: "97",
+      }
+    ],
   },
   {
-    id: "2027-002",
-    name: "Billie Eilish",
-    section: "Grade 10 MMACC",
-    year: "2027-2028",
+    name: "Jover Daracan",
+    studentID: "2022-002",
+    grade: "Grade 10 MMARCC",
     subject: "Advance English",
-    grades: {
-      Q1: "92",
-      Q2: "95",
-      Q3: "91",
-      Q4: "96"
-    }
-  }
-];
+    grades: [
+      {
+        firstQuarter: "93",
+        secondQuarter: "93",
+        thirdQuarter: "87",
+        fourthQuarter: "96",
+      }
+    ],
+  },
+]
 
-const quarters = ["Q1", "Q2", "Q3", "Q4"];
-const isMaintenance = false;
+// Grade 7 Seeping
+// Grade 7 Berber
+
+// Grade 8 Tejano
+// Grade 8 Guanio
+
+// Grade 9 Santos
+// Grade 9 Bayudang
+
+// Grade 10 MMACC
+// Grade 10 MMARCC
+
+
+/*
+Grade 7 Math 101
+Grade 7 Biology
+Grade 7 Basic English
+
+Grade 8 Algebra
+Grade 8 Physics
+Grade 8 Grammar
+
+Grade 9 Geometry
+Grade 9 Chemistry
+Grade 9 Punctuation
+
+Grade 10 Trigonometry
+Grade 10 Geology
+Grade 10 Advance English
+*/
 
 export default function TeacherManageStudents() {
-  if (isMaintenance) {
-    return <UnderMaintenance />
-  }
 
-  const [students, setStudents] = useState(trialStudents);
-  const [selectedCell, setSelectedCell] = useState(null);
-  const [editedValue, setEditedValue] = useState("");
-  const [selectedSection, setSelectedSection] = useState("All");
-  const [selectedYear, setSelectedYear] = useState("All");
+  const defaultValue = "All"
+  const [filter, setFilter] = useState(defaultValue)
 
-  const handleCellClicked = (studentIndex, field) => {
-    setSelectedCell({ studentIndex, field });
-    setEditedValue(students[studentIndex].grades[field]);
-  };
-
-  const handleSave = () => {
-    const updatedStudents = [...students];
-    updatedStudents[selectedCell.studentIndex].grades[selectedCell.field] = editedValue;
-    setStudents(updatedStudents);
-    setSelectedCell(null);
-  };
-
-  const calculateAverage = (grades) => {
-    const values = Object.values(grades).map(Number);
-    const total = values.reduce((sum, val) => sum + val, 0);
-    return (total / values.length).toFixed(2);
-  };
-
-  const filteredStudents = students.filter((student) => {
-    const sectionMatch = selectedSection === "All" || student.section === selectedSection;
-    const yearMatch = selectedYear === "All" || student.year === selectedYear;
-    return sectionMatch && yearMatch;
-  });
-// kung ano ung nakalagay sa  json na year and section, un din dapat andto
-  const selectOptions = [
-
-    { label: "Grade 7 Berber", year: "2024-2025", section: "Grade 7 Berber" },
-    { label: "Grade 7 Seeping", year: "2024-2025", section: "Grade 7 Seeping" },
-    { label: "Grade 8 Guanio", year: "2025-2026", section: "Grade 8 Guanio" },
-    { label: "Grade 9 Santos", year: "2026-2027", section: "Grade 9 Santos" },
-    { label: "Grade 9 Bayudang", year: "2026-2027", section: "Grade 9 Bayudang" },
-    { label: "Grade 10 MMARC", year: "2027-2028", section: "Grade 10 MMARCC" },
-  ];
+  const filteredStudents = studentData.filter(
+    item => {
+      const withSpaceFilter = filter.replace(/([a-zA-Z])(\d)/, '$1 $2').replace(/(\d)([A-Za-z])/, '$1 $2')
+      return filter === "All" || item.grade === withSpaceFilter
+    }
+  )
 
   return (
-    <div className="p-4 space-y-4">
-      <div>
-        <Select onValueChange={(value) => {
-          const selected = selectOptions.find(opt => opt.label === value);
-          setSelectedSection(selected.section);
-          setSelectedYear(selected.year);
-        }}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Section & Year" />
+    <div className="className='flex justify-center flex-1 flex-col p-4 space-y-3">
+      {/* dropdown */}
+      <div className="flex justify-end">
+        {/* grade and section */}
+        <Select
+          onValueChange={setFilter}
+          value={filter}
+          defaultValue={filter}>
+          <SelectTrigger className="w-fit">
+            <SelectValue placeholder="Grade & Section" />
           </SelectTrigger>
           <SelectContent>
-            {selectOptions.map((opt) => (
-              <SelectItem key={opt.label} value={opt.label}>{opt.label}</SelectItem>
-            ))}
+            <SelectItem value="All">All</SelectItem>
+            <SelectItem value="Grade7Seeping">Grade 7 Seeping</SelectItem>
+            <SelectItem value="Grade7Berber">Grade 7 Berber</SelectItem>
+            <SelectItem value="Grade8Tejano">Grade 8 Tejano</SelectItem>
+            <SelectItem value="Grade8Guanio">Grade 8 Guanio</SelectItem>
+            <SelectItem value="Grade9Santos">Grade 9 Santos</SelectItem>
+            <SelectItem value="Grade9Bayudang">Grade 9 Bayudang</SelectItem>
+            <SelectItem value="Grade10MMACC">Grade 10 MMACC</SelectItem>
+            <SelectItem value="Grade10MMARCC">Grade 10 MMARCC</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
+      {/* card */}
       <Card>
+        <CardHeader>
+          <CardTitle>Manage Student</CardTitle>
+          {
+            filter !== "All" && filteredStudents.length > 0 && (
+              <CardDescription>Subject: {filteredStudents[0].subject} </CardDescription>
+            )
+          }
+        </CardHeader>
         <CardContent>
-          <CardHeader>
-            <CardTitle>Manage Students</CardTitle>
-            <CardDescription>Grades per Quarter</CardDescription>
-          </CardHeader>
+          {/* table */}
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>ID</TableHead>
-                <TableHead>NAME</TableHead>
-                <TableHead>SUBJECT</TableHead>
-                {quarters.map((quarter) => (
-                  <TableHead key={quarter}>{quarter}</TableHead>
-                ))}
-                <TableHead>AVERAGE</TableHead>
+                <TableHead>Student ID</TableHead>
+                <TableHead>Student Name</TableHead>
+                <TableHead>Q1</TableHead>
+                <TableHead>Q2</TableHead>
+                <TableHead>Q3</TableHead>
+                <TableHead>Q4</TableHead>
+                <TableHead>Average</TableHead>
+                <TableHead>Remarks</TableHead>
+                <TableHead>Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredStudents.map((student, index) => (
-                <TableRow key={student.id}>
-                  <TableCell>{student.id}</TableCell>
-                  <TableCell>{student.name}</TableCell>
-                  <TableCell>{student.subject}</TableCell>
-                  {quarters.map((quarter) => (
-                    <TableCell
-                      key={quarter}
-                      onClick={() => handleCellClicked(index, q)}
-                      className="cursor-pointer hover:bg-gray-100"
-                    >
-                      {student.grades[quarter]}
-                    </TableCell>
-                  ))}
-                  <TableCell>{calculateAverage(student.grades)}</TableCell>
-                </TableRow>
-              ))}
+
+              {
+                filteredStudents.length > 0 ? (
+                  filteredStudents.map(item => {
+
+                    const averageGrade = item.grades.map(item => {
+                      const aveGrade = (Number(item.firstQuarter) + Number(item.secondQuarter) + Number(item.thirdQuarter) + Number(item.fourthQuarter)) / 4
+                      return aveGrade.toFixed(2)
+                    })
+
+                    const className = `${averageGrade >= 75.00 ? "text-green-500" : "text-red-500"
+                      } font-medium`
+
+                    return (
+                      <TableRow key={item.studentID}>
+                        <TableCell>{item.studentID}</TableCell>
+                        <TableCell>{item.name}</TableCell>
+                        {
+                          item.grades.map((item) => (
+                            <>
+                              <TableCell>{item.firstQuarter}</TableCell>
+                              <TableCell>{item.secondQuarter}</TableCell>
+                              <TableCell>{item.thirdQuarter}</TableCell>
+                              <TableCell>{item.fourthQuarter}</TableCell>
+                            </>
+
+                          ))
+                        }
+                        <TableCell>{averageGrade}</TableCell>
+                        <TableCell
+                          className={className}
+                        >
+                          {averageGrade >= 75.00 ? "Passed" : "Failed"}
+                        </TableCell>
+                        <TableCell><EditGradeDialog student={item} /></TableCell>
+                      </TableRow>
+                    )
+                  })
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={9} className="text-center">No Data</TableCell>
+                  </TableRow>
+                )
+              }
             </TableBody>
           </Table>
         </CardContent>
       </Card>
-
-      {selectedCell && (
-        <Dialog open={true} onOpenChange={() => setSelectedCell(null)}>
-          <DialogTrigger>Open</DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Edit {selectedCell.field}</DialogTitle>
-              <DialogDescription>Update the grade for the selected quarter.</DialogDescription>
-            </DialogHeader>
-            <Input
-              value={editedValue}
-              onChange={(e) => setEditedValue(e.target.value)}
-            />
-            <div className='flex gap-4 mt-4'>
-              <Button variant="outline" onClick={() => setSelectedCell(null)}>
-                Cancel
-              </Button>
-              <Button onClick={handleSave}>Save</Button>
-            </div>
-          </DialogContent>
-        </Dialog>
-      )}
     </div>
-  );
+  )
 }
