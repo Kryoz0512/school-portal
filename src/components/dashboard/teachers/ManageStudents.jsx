@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Input } from "@/components/ui/input"
 import EditGradeDialog from './EditGradeDialog'
 
 const studentData = [
@@ -174,38 +175,44 @@ export default function TeacherManageStudents() {
 
   const defaultValue = "All"
   const [filter, setFilter] = useState(defaultValue)
+  const [search, setSearch] = useState("");
 
   const filteredStudents = studentData.filter(
     item => {
       const withSpaceFilter = filter.replace(/([a-zA-Z])(\d)/, '$1 $2').replace(/(\d)([A-Za-z])/, '$1 $2')
-      return filter === "All" || item.grade === withSpaceFilter
+      const filterBySelect = filter === "All" || item.grade === withSpaceFilter
+      const filterBySearch = search === "" || item.name.toLowerCase().includes(search.toLowerCase()) || item.studentID.toLowerCase().includes(search.toLowerCase())
+      return filterBySelect & filterBySearch
     }
   )
 
   return (
-    <div className="className='flex justify-center flex-1 flex-col p-4 space-y-3">
+    <div className="flex flex-1 flex-col p-4 space-y-4 mt-3">
       {/* dropdown */}
       <div className="flex justify-end">
         {/* grade and section */}
-        <Select
-          onValueChange={setFilter}
-          value={filter}
-          defaultValue={filter}>
-          <SelectTrigger className="w-fit">
-            <SelectValue placeholder="Grade & Section" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="All">All</SelectItem>
-            <SelectItem value="Grade7Seeping">Grade 7 Seeping</SelectItem>
-            <SelectItem value="Grade7Berber">Grade 7 Berber</SelectItem>
-            <SelectItem value="Grade8Tejano">Grade 8 Tejano</SelectItem>
-            <SelectItem value="Grade8Guanio">Grade 8 Guanio</SelectItem>
-            <SelectItem value="Grade9Santos">Grade 9 Santos</SelectItem>
-            <SelectItem value="Grade9Bayudang">Grade 9 Bayudang</SelectItem>
-            <SelectItem value="Grade10MMACC">Grade 10 MMACC</SelectItem>
-            <SelectItem value="Grade10MMARCC">Grade 10 MMARCC</SelectItem>
-          </SelectContent>
-        </Select>
+        <div className="flex gap-4 w-1/2">
+          <Input onChange={(e) => { setSearch(e.target.value) }} type="text" placeholder="Search for Student" />
+          <Select
+            onValueChange={setFilter}
+            value={filter}
+            defaultValue={filter}>
+            <SelectTrigger className="w-fit">
+              <SelectValue placeholder="Grade & Section" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="All">All</SelectItem>
+              <SelectItem value="Grade7Seeping">Grade 7 Seeping</SelectItem>
+              <SelectItem value="Grade7Berber">Grade 7 Berber</SelectItem>
+              <SelectItem value="Grade8Tejano">Grade 8 Tejano</SelectItem>
+              <SelectItem value="Grade8Guanio">Grade 8 Guanio</SelectItem>
+              <SelectItem value="Grade9Santos">Grade 9 Santos</SelectItem>
+              <SelectItem value="Grade9Bayudang">Grade 9 Bayudang</SelectItem>
+              <SelectItem value="Grade10MMACC">Grade 10 MMACC</SelectItem>
+              <SelectItem value="Grade10MMARCC">Grade 10 MMARCC</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       {/* card */}

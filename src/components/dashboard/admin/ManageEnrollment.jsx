@@ -79,10 +79,10 @@ export default function ManageEnrollment() {
 
                         {/* Inputs */}
                         <div className="grid grid-cols-4 gap-4">
-                            <Input id="lastName" name="lastName" onChange={handleChange} placeholder="Last Name"/>
-                            <Input id="givenName" name="givenName" onChange={handleChange} placeholder="Given Name"/>
-                            <Input id="middleName" name="middleName" onChange={handleChange} placeholder="Middle Name"/>
-                            <Input id="extName" name="extName" onChange={handleChange}placeholder="Extension Name" />
+                            <Input id="lastName" name="lastName" onChange={handleChange} placeholder="Last Name" />
+                            <Input id="givenName" name="givenName" onChange={handleChange} placeholder="Given Name" />
+                            <Input id="middleName" name="middleName" onChange={handleChange} placeholder="Middle Name" />
+                            <Input id="extName" name="extName" onChange={handleChange} placeholder="Extension Name" />
                         </div>
                     </div>
 

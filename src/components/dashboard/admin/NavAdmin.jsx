@@ -1,4 +1,4 @@
-import { Sheet, ContactRound, Users, BookOpenText, School } from "lucide-react";
+import { Sheet, ContactRound, Users, BookOpenText, School, BookMarked } from "lucide-react";
 import {
  SidebarGroup,
  SidebarGroupContent,
@@ -29,7 +29,7 @@ const navAdmin = [
  },
  {
   name: "Manage Section",
-  path: "/admin_dashboard/teachers",
+  path: "/admin_dashboard/sections",
   link: "sections",
   icon: School,
  },
@@ -38,6 +38,12 @@ const navAdmin = [
   path: "/admin_dashboard/schedule",
   link: "schedule",
   icon: Sheet,
+ },
+ {
+  name: "Archive",
+  path: "/admin_dashboard/archive",
+  link: "archive",
+  icon: BookMarked ,
  },
 ];
 

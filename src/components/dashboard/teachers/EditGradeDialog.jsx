@@ -70,33 +70,3 @@ export default function EditGradeDialog({ student }) {
   </Dialog>
  )
 }
-
-
-
-{/* <Dialog>
- <DialogTrigger asChild>
-  <Button onClick={() => setSelectedRow(student)} variant="outline">
-   <SquarePen />
-  </Button>
- </DialogTrigger>
- <DialogContent>
-  <DialogHeader>
-   <DialogTitle>Edit Grades</DialogTitle>
-   <DialogDescription>
-    Name: {selectedRow.name}
-   </DialogDescription>
-   <DialogDescription>
-    Student ID: {selectedRow.studentID}
-   </DialogDescription>
-   <DialogDescription>
-    Student ID: {selectedRow.subject}
-   </DialogDescription>
-   <DialogDescription>
-      This action cannot be undone. This will permanently delete your account
-      and remove your data from our servers.
-     </DialogDescription>
-  </DialogHeader>
-
-  <form action=""></form>
- </DialogContent>
-</Dialog> */}
