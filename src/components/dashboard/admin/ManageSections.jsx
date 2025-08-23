@@ -263,7 +263,7 @@ function AdminEditDialogSection({ data }) {
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
             <Button type="button">
-              Add
+              Edit
             </Button>
           </DialogClose>
         </DialogFooter>

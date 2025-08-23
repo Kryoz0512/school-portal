@@ -136,10 +136,6 @@ export default function ManageTeachers() {
     setEditTeacher(null);
   };
 
-  // const filteredTeachers =
-  //   filterSubject === "All"
-  //     ? teachers
-  //     : teachers.filter((teacher) => teacher.subject === filterSubject);
 
   const filteredTeachers = teachers.filter(
     item => {
@@ -429,7 +425,7 @@ function AdminAlertDialogTeachers() {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction className="bg-red-500">Delete</AlertDialogAction>
+          <AlertDialogAction className="bg-red-500 hover:bg-red-700">Delete</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
